@@ -16,4 +16,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: llvm-11.0.0
-          path: "%localappdata%\llvmenv"
+          path: "%localappdata%\\llvmenv"
