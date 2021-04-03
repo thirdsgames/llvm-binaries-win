@@ -1,0 +1,19 @@
+name: Compile LLVM
+
+on: [push]
+
+jobs:
+  compile-llvm:
+    runs-on: windows-latest
+    steps:
+      - name: Install llvmenv
+        run: cargo install llvmenv
+      - name: Compile LLVM
+        run: |
+          llvmenv init
+          llvmenv build-entry 11.0.0
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: llvm-11.0.0
+          path: %localappdata%\llvmenv
