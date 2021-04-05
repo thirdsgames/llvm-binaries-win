@@ -27,14 +27,15 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Download LLVM sources
-        run: curl -sLo src.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ matrix.node }}/llvm-project-${{ matrix.node }}.tar.xz
+        run: |
+          cd ~
+          curl -sLo src.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ matrix.node }}/llvm-project-${{ matrix.node }}.tar.xz
 
       - name: Unzip LLVM sources
         run: |
+          cd ~
           7z x src.tar.xz
           7z x src.tar
-          pwd
-          ls
 
       - name: Configure CMake
         run: |
@@ -56,25 +57,26 @@ jobs:
 
       - name: Create tarballs
         run: |
-          tar -czvf llvm-${{ matrix.node }}.bin.tar.gz -C ~/llvm_bin/bin *
-          tar -czvf llvm-${{ matrix.node }}.lib.tar.gz -C ~/llvm_bin/lib *
-          tar -czvf llvm-${{ matrix.node }}.include.tar.gz -C ~/llvm_bin/include *
+          cd ~
+          tar -czvf llvm-${{ matrix.node }}.bin.tar.gz -C llvm_bin/bin *
+          tar -czvf llvm-${{ matrix.node }}.lib.tar.gz -C llvm_bin/lib *
+          tar -czvf llvm-${{ matrix.node }}.include.tar.gz -C llvm_bin/include *
 
       - name: Upload binary artifacts
         uses: actions/upload-artifact@v2
         with:
           name: llvm-${{ matrix.node }}.bin
-          path: llvm-${{ matrix.node }}.bin.tar.gz
+          path: ~/llvm-${{ matrix.node }}.bin.tar.gz
       - name: Upload library artifacts
         uses: actions/upload-artifact@v2
         with:
           name: llvm-${{ matrix.node }}.lib
-          path: llvm-${{ matrix.node }}.lib.tar.gz
+          path: ~/llvm-${{ matrix.node }}.lib.tar.gz
       - name: Upload include artifacts
         uses: actions/upload-artifact@v2
         with:
           name: llvm-${{ matrix.node }}.include
-          path: llvm-${{ matrix.node }}.include.tar.gz
+          path: ~/llvm-${{ matrix.node }}.include.tar.gz
 
   create-release:
     runs-on: ubuntu-latest
