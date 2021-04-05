@@ -27,7 +27,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Download LLVM sources
-        run: curl -s https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ matrix.node }}/llvm-project-${{ matrix.node }}.src.tar.xz | tar -xvz -C ~/src
+        run: |
+          curl -UseBasicParsing https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ matrix.node }}/llvm-project-${{ matrix.node }}.src.tar.xz -OutFile src.tar.xz
+          tar -xvz src.tar.xz -C ~/src
 
       - name: Configure CMake
         run: |
