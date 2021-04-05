@@ -30,13 +30,13 @@ jobs:
         run: curl -sLo src.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ matrix.node }}/llvm-project-${{ matrix.node }}.tar.xz
 
       - name: Unzip LLVM sources
-        run: tar -xvzf src.tar.xz -C ~/src
+        run: 7z x src.tar.xz -o ~/src
 
       - name: Configure CMake
         run: |
           mkdir ~/llvm_build
           cd ~/llvm_build
-          cmake ~/src
+          cmake ~/src/llvm-project-${{ matrix.node }}
 
       - name: Compile LLVM
         run: |
