@@ -27,15 +27,13 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Download LLVM sources
-        uses: teddyking/dependency-action@master
-        with:
-          deps: https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ matrix.node }}/llvm-project-${{ matrix.node }}.src.tar.xz
+        run: curl -s https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ matrix.node }}/llvm-project-${{ matrix.node }}.src.tar.xz | tar -xvz -C ~/src
 
       - name: Configure CMake
         run: |
           mkdir ~/llvm_build
           cd ~/llvm_build
-          cmake /github/home/llvm-project-${{ matrix.node }}.src
+          cmake ~/src
 
       - name: Compile LLVM
         run: |
