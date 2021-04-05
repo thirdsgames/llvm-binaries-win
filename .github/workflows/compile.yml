@@ -31,7 +31,7 @@ jobs:
 
       - name: Unzip LLVM sources
         run: |
-          7z x src.tar.xz -osrc.tar
+          7z x src.tar.xz
           7z x src.tar -o~/src
 
       - name: Configure CMake
