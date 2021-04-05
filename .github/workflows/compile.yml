@@ -32,13 +32,13 @@ jobs:
       - name: Unzip LLVM sources
         run: |
           7z x src.tar.xz
-          7z x src.tar -osrc
+          7z x src.tar
 
       - name: Configure CMake
         run: |
           mkdir ~/llvm_build
           cd ~/llvm_build
-          cmake src/llvm-project-${{ matrix.node }}
+          cmake llvm-project-${{ matrix.node }}
 
       - name: Compile LLVM
         run: |
