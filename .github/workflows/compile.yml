@@ -41,7 +41,7 @@ jobs:
         run: |
           mkdir ~/llvm_build
           cd ~/llvm_build
-          cmake ../llvm-project-${{ matrix.node }}
+          cmake ../llvm-project-${{ matrix.node }}/llvm
 
       - name: Compile LLVM
         run: |
