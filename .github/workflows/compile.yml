@@ -33,6 +33,7 @@ jobs:
         run: |
           7z x src.tar.xz
           7z x src.tar
+          ls -lah .
 
       - name: Configure CMake
         run: |
