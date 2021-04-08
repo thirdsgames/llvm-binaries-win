@@ -41,7 +41,7 @@ jobs:
         run: |
           mkdir ~/llvm_build
           cd ~/llvm_build
-          cmake ../llvm-project-${{ matrix.node }}/llvm -Thost=x64
+          cmake ../llvm-project-${{ matrix.node }}/llvm -Thost=x64 -DLLVM_ENABLE_PROJECTS=lld
 
       - name: Compile LLVM
         run: |
